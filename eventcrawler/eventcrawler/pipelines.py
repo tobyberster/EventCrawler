@@ -15,7 +15,7 @@ class EventcrawlerPipeline(object):
         line=json.dumps(dict(item))+"\n"
         self.file.write(line)
         self.items.append((item['score'],item['link']))
-        self.items=sorted(self.items,reverse=True)
+        self.items=sorted(self.items, key=x.score, reverse=True)
         self.results=open('toplinks.jl','wb')
         for tup in self.items[:10]:
             self.results.write(tup[1][0]+'\n')
